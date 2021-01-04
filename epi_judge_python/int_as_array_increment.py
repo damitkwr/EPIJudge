@@ -5,7 +5,20 @@ from test_framework import generic_test
 
 def plus_one(A: List[int]) -> List[int]:
     # TODO - you fill in here.
-    return []
+    A[-1] += 1
+
+    carry = 0
+    for i in reversed(range(len(A))):
+
+        tempNo = A[i] + carry
+        A[i] = tempNo % 10
+        carry = tempNo // 10
+    
+    if carry != 0:
+        A.insert(0, 1)
+
+
+    return A
 
 
 if __name__ == '__main__':
