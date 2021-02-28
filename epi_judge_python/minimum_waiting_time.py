@@ -5,7 +5,11 @@ from test_framework import generic_test
 
 def minimum_total_waiting_time(service_times: List[int]) -> int:
     # TODO - you fill in here.
-    return 0
+    service_times.sort()
+    totalWaitTime = 0
+    for i in range(1, len(service_times)):
+        totalWaitTime += sum(service_times[:i])
+    return totalWaitTime
 
 
 if __name__ == '__main__':

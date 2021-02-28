@@ -1,5 +1,5 @@
 from typing import List
-
+import random
 from test_framework import generic_test
 
 
@@ -8,7 +8,30 @@ from test_framework import generic_test
 # find_kth_largest(3, A) returns 1, and find_kth_largest(4, A) returns -1.
 def find_kth_largest(k: int, A: List[int]) -> int:
     # TODO - you fill in here.
-    return 0
+    def do_pivot_and_search(searchArray, k):
+        print(len(searchArray))
+        pivot = random.randint(0, len(searchArray)-1)
+        larger, smaller = [], []
+        for no in searchArray:
+            if no > searchArray[pivot]:
+                larger.append(no)
+            elif no < searchArray[pivot]:
+                smaller.append(no)
+
+        if len(larger) > k-1:
+            return False, larger
+        elif len(larger) < k-1:
+            return False, smaller
+        else:
+            return True, [pivot]
+
+    found = False
+    returnArray = A
+    biggest = k
+    while not found:
+        print(found)
+        found, returnArray, biggest = do_pivot_and_search(returnArray, biggest)    
+    return returnArray[0]
 
 
 if __name__ == '__main__':

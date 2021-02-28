@@ -11,7 +11,21 @@ Event = collections.namedtuple('Event', ('start', 'finish'))
 
 def find_max_simultaneous_events(A: List[Event]) -> int:
     # TODO - you fill in here.
-    return 0
+    Endpoint = collections.namedtuple('Endpoint', ('time', 'is_start'))
+    endpoints = [point for event in A for point in (
+        Endpoint(event.start, True), Endpoint(event.finish, False))]
+
+    endpoints.sort(key=lambda e: (e.time, not e.is_start))
+
+    max_sim_events, curr_sim_events = 0, 0
+    for endpoint in endpoints:
+        if endpoint.is_start:
+            curr_sim_events += 1
+            max_sim_events = max(max_sim_events, curr_sim_events)
+        else:
+            curr_sim_events -= 1
+
+    return max_sim_events
 
 
 @enable_executor_hook

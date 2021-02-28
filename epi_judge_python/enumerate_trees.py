@@ -8,6 +8,8 @@ from test_framework.test_utils import enable_executor_hook
 
 def generate_all_binary_trees(num_nodes: int
                               ) -> List[Optional[BinaryTreeNode]]:
+
+    def helper(totalNoOfNodes, root, additionNode)
     # TODO - you fill in here.
     return []
 

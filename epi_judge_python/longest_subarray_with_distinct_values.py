@@ -5,7 +5,20 @@ from test_framework import generic_test
 
 def longest_subarray_with_distinct_entries(A: List[int]) -> int:
     # TODO - you fill in here.
-    return 0
+    start = 0
+    longestLength = 0
+    entries = dict()
+    for i, letter in enumerate(A):
+        if letter in entries:
+            duplicateIndex = entries[letter]
+            if duplicateIndex >= start:
+                longestLength = max(longestLength, i-start)
+                start = entries[letter]+1
+
+        entries[letter] = i
+
+
+    return max(longestLength, len(A)-start)
 
 
 if __name__ == '__main__':

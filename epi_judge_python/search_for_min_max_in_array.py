@@ -9,7 +9,24 @@ MinMax = collections.namedtuple('MinMax', ('smallest', 'largest'))
 
 def find_min_max(A: List[int]) -> MinMax:
     # TODO - you fill in here.
-    return MinMax(0, 0)
+    if len(A) == 1:
+        return MinMax(A[0], A[0])
+
+    if A[0] < A[1]:
+        globalMin, globalMax = A[0], A[1]
+    else:
+        globalMin, globalMax = A[1], A[0]
+
+
+    for i in range(2, len(A)-1, 2):
+        globalMin = min(A[i], A[i+1]) if min(A[i], A[i+1]) < globalMin else globalMin
+        globalMax = max(A[i], A[i+1]) if max(A[i], A[i+1]) > globalMax else globalMax
+
+    if len(A) % 2 != 0:
+        globalMin = A[len(A)-1] if A[len(A)-1] < globalMin else globalMin
+        globalMax = A[len(A)-1] if A[len(A)-1] > globalMax else globalMax
+
+    return MinMax(globalMin, globalMax)
 
 
 def res_printer(prop, value):

@@ -11,7 +11,18 @@ Person = collections.namedtuple('Person', ('age', 'name'))
 
 def group_by_age(people: List[Person]) -> None:
     # TODO - you fill in here.
-    return
+    ages_hashmap = collections.defaultdict(list)
+    returnList = []
+    for person in people:
+        ages_hashmap[person.age].append(person)
+
+    for key in ages_hashmap.keys():
+        peopleList = ages_hashmap[key]
+        for person in peopleList:
+            returnList.append(person)
+    print(returnList)
+    return returnList
+    
 
 
 @enable_executor_hook
